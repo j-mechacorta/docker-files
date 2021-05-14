@@ -1,4 +1,4 @@
-.
+```
 ├── hive-metastore
 │   ├── binaries
 │   │   ├── hadoop
@@ -43,3 +43,4 @@
 └── README.md
 
 30 directories, 12 files
+```
