@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  gather_facts: no
+  vars:
+    - hive_url: "https://mirror.lyrahosting.com/apache/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz"
+    - hadoop_url: "https://archive.apache.org/dist/hadoop/common/hadoop-2.7.5/hadoop-2.7.5.tar.gz"
+    - postgres_jdbc_jar: "https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.20/postgresql-42.2.20.jar"
+  
+  tasks:
+    - name: "Download binaries hive/hadoop/postgresql"
+      file:
+        path: "{{ item }}"
+        state: present
+      with_items:
+        - './binaries/hadoop'
+        - './binaries/hive'
