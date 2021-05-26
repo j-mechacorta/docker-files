@@ -8,10 +8,18 @@
     - postgres_jdbc_jar: "https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.20/postgresql-42.2.20.jar"
   
   tasks:
-    - name: "Download binaries hive/hadoop/postgresql"
+    - name: "Create binaries folder structure"
       file:
         path: "{{ item }}"
-        state: present
+        state: directory
       with_items:
-        - './binaries/hadoop'
-        - './binaries/hive'
+        - './test/binaries/hadoop'
+        - './test/binaries/hive'
+
+    - name: "Download binaries hive/hadoop/postgresql"
+      get_url:
+        url: "{{ item[0] }}"
+        dest: "{{item[1] }}"
+      with_items:
+        - ["https://mirror.lyrahosting.com/apache/hive/hive-standalone-metastore-3.0.0/hive-standalone-metastore-3.0.0-bin.tar.gz", "./test/"]
+        - ["https://archive.apache.org/dist/hadoop/common/hadoop-2.7.5/hadoop-2.7.5.tar.gz","./test"]
