@@ -1,6 +1,6 @@
 FROM fedora-minimal:33
 
-VOLUME [ "/workspace", "/config", "/config" ]
+VOLUME [ "/workspace", "/config", "/data" ]
 RUN mkdir /opt/kernels
 
 COPY requirements.txt  requirements.txt
