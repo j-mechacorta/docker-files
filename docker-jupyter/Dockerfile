@@ -1,4 +1,4 @@
-FROM fedora-minimal:33
+FROM fedora-minimal:36
 
 VOLUME [ "/workspace", "/config", "/data" ]
 RUN mkdir /opt/kernels
@@ -9,7 +9,7 @@ COPY reqpyspark321.txt  reqpyspark321.txt
 
 COPY jupyter_notebook_config.py /config/jupyter_notebook_config.py
 
-RUN microdnf -y install pip python tree python3.7 python3.10 gcc g++ git gcc g++ git java-11-openjdk && microdnf -y install nodejs
+RUN microdnf -y install pip python tree python3.10 gcc g++ git gcc g++ git java-11-openjdk && microdnf -y install nodejs
 
 ENV JAVA_HOME=/usr/lib/jvm/jre
 
