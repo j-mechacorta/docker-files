@@ -4,21 +4,20 @@ VOLUME [ "/workspace", "/config", "/data" ]
 RUN mkdir /opt/kernels
 
 COPY requirements.txt  requirements.txt
-COPY reqpyspark244.txt  reqpyspark244.txt
-COPY reqpyspark311.txt  reqpyspark311.txt
+COPY reqpyspark330.txt  reqpyspark330.txt
+COPY reqpyspark321.txt  reqpyspark321.txt
 
 COPY jupyter_notebook_config.py /config/jupyter_notebook_config.py
-# COPY nodejs.module /etc/dnf/modules.d/nodejs.module
 
-RUN microdnf -y install pip python tree python3.7 gcc g++ git java-1.8.0-openjdk gcc g++ git java-1.8.0-openjdk && microdnf -y install nodejs
+RUN microdnf -y install pip python tree python3.7 python3.10 gcc g++ git gcc g++ git java-11-openjdk && microdnf -y install nodejs
 
 ENV JAVA_HOME=/usr/lib/jvm/jre
 
-RUN pip install --upgrade cffi setuptools pip pypandoc && pip install --no-cache-dir -r requirements.txt && jupyter lab build --dev-build=False --mimimize=False
+RUN pip install --upgrade cffi setuptools pip pypandoc && pip install --no-cache-dir -r requirements.txt && jupyter lab build --dev-build=False --mimimize=True
 
+RUN python3.10 -m venv /opt/kernels/spark330 && /opt/kernels/spark330/bin/pip install --upgrade pip && /opt/kernels/spark330/bin/pip install ipykernel && /opt/kernels/spark330/bin/python -m ipykernel install --name "spark330" --display-name "pyspark3.3.0" && /opt/kernels/spark330/bin/pip install -r reqpyspark330.txt
+RUN python3.10 -m venv /opt/kernels/spark321 && /opt/kernels/spark321/bin/pip install --upgrade pip && /opt/kernels/spark321/bin/pip install ipykernel && /opt/kernels/spark321/bin/python -m ipykernel install --name "spark321" --display-name "pyspark3.2.1" && /opt/kernels/spark321/bin/pip install -r reqpyspark321.txt
 
-RUN python3.7 -m venv /opt/kernels/py244 && /opt/kernels/py244/bin/pip install --upgrade pip && /opt/kernels/py244/bin/pip install ipykernel && /opt/kernels/py244/bin/python -m ipykernel install --name "py244" --display-name "pyspark2.4.4" && /opt/kernels/py244/bin/pip install pypandoc && /opt/kernels/py244/bin/pip install pyspark==2.4.4
-RUN python3.7 -m venv /opt/kernels/py311 && /opt/kernels/py311/bin/pip install --upgrade pip && /opt/kernels/py311/bin/pip install ipykernel && /opt/kernels/py311/bin/python -m ipykernel install --name "py311" --display-name "pyspark3.1.1" && /opt/kernels/py311/bin/pip install pyspark==3.1.1
 
 WORKDIR /workspace
 
