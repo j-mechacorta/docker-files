@@ -21,5 +21,6 @@ RUN microdnf -y install azure-cli
 WORKDIR /workspace
 
 EXPOSE 8888/tcp
+EXPOSE 4040/tcp
 
 CMD [ "jupyter", "lab", "--config", "/config/jupyter_notebook_config", "--allow-root" ]
