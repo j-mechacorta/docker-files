@@ -1,2 +1,14 @@
 jupyterlab
 jupyterlab-git
+pyspark
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+statsmodels
+loguru
+tabulate
+colorama
+azure-storage-blob
+azure-identity
