@@ -1,4 +1,10 @@
 pyspark
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+statsmodels
 loguru
 tabulate
 colorama
