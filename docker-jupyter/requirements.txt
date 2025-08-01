@@ -1,6 +1,10 @@
 jupyterlab
 jupyterlab-git
-pyspark
+pyspark==4.0.0
+delta-spark
+chispa
+cuallee
+great_expectations
 pandas
 numpy
 seaborn
